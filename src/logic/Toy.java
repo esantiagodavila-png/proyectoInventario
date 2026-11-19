@@ -7,24 +7,30 @@ import java.util.List;
 public class Toy {
 
     private int stock;
-    private double price;
+    private double purchase;
+    private double salePrice;
     private String tradeMark;
     private boolean available;
     private String model;
-    private List<Toy> toys;
 
-    Inventory inv = new Inventory(toys);
 
-    public Toy(int stock, double price, String tradeMark, boolean available, String model){
+    Inventory inv = new Inventory();
+
+    public Toy(int stock, double purchase, double salePrice, String tradeMark, boolean available, String model){
         this.stock = stock;
-        this.price = price;
+        this.purchase = purchase;
+        this.salePrice = salePrice;
         this.tradeMark = tradeMark;
         this.available = available;
         this.model = model;
     }
 
-    public double getPrice() {
-        return price;
+    public double getpurchase() {
+        return purchase;
+    }
+
+    public  double getSalePrice(){
+        return salePrice;
     }
 
     public int getStock() {
@@ -43,14 +49,14 @@ public class Toy {
         return model;
     }
 
-    public void sale(int amount){
+    public void sale(int amount, Inventory inv){
 
         double earned = 0;
 
         if(amount <= stock){
 
             stock = stock - amount;
-            earned = price * amount;
+            earned = salePrice * amount;
             System.out.println("Venta realizada con exito, gano: " + amount + " dolares\nle quedan: " + getStock() + getModel() + " en stock");
             inv.releaseStock(amount);
 
@@ -58,10 +64,10 @@ public class Toy {
 
     }
 
-    public void buy(int amount){
+    public void buy(int amount , Inventory inv){
 
         double toSpend ;
-        toSpend = price * amount;
+        toSpend = purchase * amount;
 
         if(inv.deductBudget(toSpend)){
             stock += amount;
@@ -70,14 +76,15 @@ public class Toy {
 
     }
 
-    public Toy searchToys(String model){
+    @Override
+    public String toString() {
+        return "Modelo: " + model +
+                "\nMarca: " + tradeMark +
+                "\nPrecio de venta: " + salePrice +
+                "\nPrecio de compra: " + purchase +
+                "\nStock: " + stock +
+                "\nDisponoble: " + (available ? "Si" : "No");
 
-        for (Toy toy : toys) {
-            if (toy.getModel().equalsIgnoreCase(model)) {
-                return toy;
-            }
-        }
-        return null;
     }
-    
+
 }

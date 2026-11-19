@@ -4,9 +4,9 @@ public class ToyGuns extends Toy{
 
     private String projectile;
 
-    public ToyGuns(int stock, double price, String model, boolean available, String tradeMark, String projectile){
+    public ToyGuns(int stock, double purchase, double salePrice , String model, boolean available, String tradeMark, String projectile){
 
-        super(stock, price, tradeMark, available, model);
+        super(stock, purchase, salePrice  ,tradeMark, available , model);
         this.projectile = projectile;
 
     }
@@ -14,4 +14,11 @@ public class ToyGuns extends Toy{
     public String getProjectile() {
         return projectile;
     }
+
+    @Override
+    public String toString() {
+        return super.toString() +
+                "\nProyectil: " + projectile;
+    }
+
 }
